@@ -1,0 +1,9 @@
+# ignore build directory
+/target/
+
+## ignore Intellij artifacts
+.idea/
+*.iml
+
+# ignore Apple OSX artifacts
+.DS_Store
