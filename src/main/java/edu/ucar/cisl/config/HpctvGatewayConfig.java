@@ -2,10 +2,7 @@ package edu.ucar.cisl.config;
 
 import edu.ucar.cisl.controller.MachineActivityReportQuery;
 import edu.ucar.cisl.query.DefaultMachineActivityReportQuery;
-import edu.ucar.cisl.report.ReportExecutor;
-import edu.ucar.cisl.report.ReportGenerator;
-import edu.ucar.cisl.report.ReportValidator;
-import edu.ucar.cisl.report.UriBuilder;
+import edu.ucar.cisl.report.*;
 import edu.ucar.cisl.report.machineactivity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -61,7 +58,7 @@ public class HpctvGatewayConfig {
 
     @Bean
     public ReportGenerator<MachineActivityReport, MachineActivityReportParameters> machineActivityReportGenerator() {
-        return new MachineActivityReportGenerator(restTemplate(), machineActivityReportUriBuilder());
+        return new RestTemplateReportGenerator<>(restTemplate(), machineActivityReportUriBuilder(), () -> MachineActivityReport.class);
     }
 
     @Bean
