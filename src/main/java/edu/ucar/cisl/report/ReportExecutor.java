@@ -18,7 +18,7 @@ public class ReportExecutor<R, P> {
         try {
             return generator.generate(parameters);
         } catch (Exception e) {
-            throw new ReportGenerationException(this.toString(), e);
+            throw new ReportGenerationException(parameters.toString(), e);
         }
     }
 
