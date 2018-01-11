@@ -1,22 +1,25 @@
-package edu.ucar.cisl.report.machineactivity;
+package edu.ucar.cisl.query;
 
 import edu.ucar.cisl.controller.MachineActivityReportQuery;
-import edu.ucar.cisl.report.ReportGenerator;
+import edu.ucar.cisl.report.*;
+import edu.ucar.cisl.report.machineactivity.MachineActivityReport;
+import edu.ucar.cisl.report.machineactivity.MachineActivityReportParameters;
 
 public class DefaultMachineActivityReportQuery implements MachineActivityReportQuery, MachineActivityReportParameters {
 
-    private final ReportGenerator<MachineActivityReport, MachineActivityReportParameters> generator;
+    private final ReportExecutor<MachineActivityReport, MachineActivityReportParameters> executor;
 
     private String machine;
     private Integer daysAgo;
 
-    public DefaultMachineActivityReportQuery(ReportGenerator generator) {
-        this.generator = generator;
+    public DefaultMachineActivityReportQuery(
+            ReportExecutor<MachineActivityReport, MachineActivityReportParameters> executor) {
+        this.executor = executor;
     }
 
     @Override
     public MachineActivityReport query() {
-        return generator.generate(this);
+        return executor.execute(this);
     }
 
     @Override
@@ -39,5 +42,13 @@ public class DefaultMachineActivityReportQuery implements MachineActivityReportQ
     public DefaultMachineActivityReportQuery daysAgo(Integer daysAgo) {
         this.daysAgo = daysAgo;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "DefaultMachineActivityReportQuery{" +
+                "machine='" + machine + '\'' +
+                ", daysAgo=" + daysAgo +
+                '}';
     }
 }

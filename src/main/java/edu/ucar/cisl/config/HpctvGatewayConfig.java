@@ -1,7 +1,10 @@
 package edu.ucar.cisl.config;
 
 import edu.ucar.cisl.controller.MachineActivityReportQuery;
+import edu.ucar.cisl.query.DefaultMachineActivityReportQuery;
+import edu.ucar.cisl.report.ReportExecutor;
 import edu.ucar.cisl.report.ReportGenerator;
+import edu.ucar.cisl.report.ReportValidator;
 import edu.ucar.cisl.report.UriBuilder;
 import edu.ucar.cisl.report.machineactivity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +65,19 @@ public class HpctvGatewayConfig {
     }
 
     @Bean
+    public ReportValidator<MachineActivityReport, MachineActivityReportParameters> machineActivityReportValidator() {
+        return new MachineActivityReportValidator();
+    }
+
+    @Bean
+    public ReportExecutor<MachineActivityReport, MachineActivityReportParameters> machineActivityReportExecutor() {
+        return new ReportExecutor<>(machineActivityReportGenerator(), machineActivityReportValidator());
+    }
+
+    @Bean
     @Scope("prototype")
     public DefaultMachineActivityReportQuery machineActivityReportQuery() {
-        DefaultMachineActivityReportQuery query = new DefaultMachineActivityReportQuery(machineActivityReportGenerator());
-        return query;
+        return new DefaultMachineActivityReportQuery(machineActivityReportExecutor());
     }
 
     @Bean
