@@ -36,7 +36,8 @@ public class MachineActivityReportEntry {
         this.jobs = jobs;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "MachineActivityReportEntry{" +
                 "date=" + date +
                 ", users=" + users +

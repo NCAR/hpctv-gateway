@@ -1,8 +1,8 @@
-package edu.ucar.cisl.report.machinetotal;
+package edu.ucar.cisl.report.machinelog;
 
 import java.math.BigInteger;
 
-public class MachineTotalReport {
+public class MachineLogReport {
 
     private Integer projects;
     private Integer jobs;
@@ -30,14 +30,5 @@ public class MachineTotalReport {
 
     public void setCoreHours(BigInteger coreHours) {
         this.coreHours = coreHours;
-    }
-
-    @Override
-    public String toString() {
-        return "MachineTotalReport{" +
-                "projects=" + projects +
-                ", jobs=" + jobs +
-                ", coreHours=" + coreHours +
-                '}';
     }
 }

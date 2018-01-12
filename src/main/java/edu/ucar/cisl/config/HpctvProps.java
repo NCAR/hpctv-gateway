@@ -11,4 +11,5 @@ public final class HpctvProps {
 
     public static final String SAM_ENDPOINT_MACHINEACTIVITY_PATH = "sam.endpoint.machineactivity.path";
     public static final String SAM_ENDPOINT_MACHINETOTAL_PATH = "sam.endpoint.machinetotal.path";
+    public static final String SAM_ENDPOINT_MACHINELOG_PATH = "sam.endpoint.machinelog.path";
 }
