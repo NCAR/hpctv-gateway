@@ -1,5 +1,6 @@
 package edu.ucar.cisl.config;
 
+import edu.ucar.cisl.report.CommonUriComponentsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +32,17 @@ public class HpctvGatewayConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        return restTemplateBuilder.basicAuthorization(env.getProperty("sam.username"), env.getProperty("sam.password")).build();
+        return restTemplateBuilder.basicAuthorization(env.getProperty(HpctvProps.SAM_USERNAME), env.getProperty(HpctvProps.SAM_PASSWORD)).build();
     }
 
+    @Bean
+    public CommonUriComponentsBuilder commonUriComponentsBuilder() {
+        CommonUriComponentsBuilder builder = new CommonUriComponentsBuilder();
+
+        builder.setScheme(env.getProperty(HpctvProps.SAM_ENDPOINT_SCHEME));
+        builder.setHost(env.getProperty(HpctvProps.SAM_HOST));
+        builder.setPort(env.getProperty(HpctvProps.SAM_PORT));
+
+        return builder;
+    }
 }

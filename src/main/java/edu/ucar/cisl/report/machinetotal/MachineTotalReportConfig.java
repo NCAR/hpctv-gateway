@@ -27,15 +27,13 @@ public class MachineTotalReportConfig {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private CommonUriComponentsBuilder commonUriComponentsBuilder;
+
     @Bean
     public UriBuilder<MachineTotalReportParameters> machineTotalReportUriBuilder() {
-        MachineTotalReportUriBuilder builder = new MachineTotalReportUriBuilder();
-
-        builder.setScheme(env.getProperty(HpctvProps.SAM_ENDPOINT_SCHEME));
-        builder.setHost(env.getProperty(HpctvProps.SAM_HOST));
-        builder.setPort(env.getProperty(HpctvProps.SAM_PORT));
+        MachineTotalReportUriBuilder builder = new MachineTotalReportUriBuilder(commonUriComponentsBuilder);
         builder.setPath(env.getProperty(HpctvProps.SAM_ENDPOINT_MACHINETOTAL_PATH));
-
         return builder;
     }
 
@@ -57,7 +55,7 @@ public class MachineTotalReportConfig {
     @Bean
     @Scope("prototype")
     public DefaultMachineTotalReportQuery machineTotalReportQuery() {
-        return new DefaultMachineTotalReportQuery();
+        return new DefaultMachineTotalReportQuery(machineTotalReportExecutor());
     }
 
     @Bean(name = "machineTotalReportQueryFactory")

@@ -21,15 +21,13 @@ public class MachineActivityReportConfig {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private CommonUriComponentsBuilder commonUriComponentsBuilder;
+
     @Bean
     public UriBuilder<MachineActivityReportParameters> machineActivityReportUriBuilder() {
-        MachineActivityReportUriBuilder builder = new MachineActivityReportUriBuilder();
-
-        builder.setScheme(env.getProperty(HpctvProps.SAM_ENDPOINT_SCHEME));
-        builder.setHost(env.getProperty(HpctvProps.SAM_HOST));
-        builder.setPort(env.getProperty(HpctvProps.SAM_PORT));
+        MachineActivityReportUriBuilder builder = new MachineActivityReportUriBuilder(commonUriComponentsBuilder);
         builder.setPath(env.getProperty(HpctvProps.SAM_ENDPOINT_MACHINEACTIVITY_PATH));
-
         return builder;
     }
 

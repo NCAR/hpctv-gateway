@@ -1,4 +1,4 @@
-package edu.ucar.cisl.report.machineactivity;
+package edu.ucar.cisl.report.machinetotal;
 
 import edu.ucar.cisl.report.CommonUriComponentsBuilder;
 import org.junit.Before;
@@ -9,28 +9,27 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class MachineActivityReportUriBuilderTest {
+public class MachineTotalReportUriBuilderTest {
 
-    private MachineActivityReportParameters parameters;
-    private MachineActivityReportUriBuilder builder;
+    private MachineTotalReportParameters parameters;
+    private MachineTotalReportUriBuilder builder;
 
     @Before
     public void setUp() throws Exception {
-        parameters = mock(MachineActivityReportParameters.class);
-        when(parameters.getDaysAgo()).thenReturn(60);
+        parameters = mock(MachineTotalReportParameters.class);
         when(parameters.getMachine()).thenReturn("cheyenne");
 
         CommonUriComponentsBuilder commonUriComponentsBuilder = new CommonUriComponentsBuilder();
         commonUriComponentsBuilder.setScheme("https");
         commonUriComponentsBuilder.setHost("host.ucar.edu");
 
-        builder = new MachineActivityReportUriBuilder(commonUriComponentsBuilder);
+        builder = new MachineTotalReportUriBuilder(commonUriComponentsBuilder);
         builder.setPath("/api/machine/{machine}");
     }
 
     @Test
     public void given_parameters__when_build__then_uri_correct() {
-        assertThatBuilderUriMatches("https://host.ucar.edu/api/machine/cheyenne?daysAgo=60");
+        assertThatBuilderUriMatches("https://host.ucar.edu/api/machine/cheyenne");
     }
 
     private void assertThatBuilderUriMatches(String uri) {
