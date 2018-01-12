@@ -1,6 +1,7 @@
 package edu.ucar.cisl.report.machineactivity;
 
 import edu.ucar.cisl.config.Factory;
+import edu.ucar.cisl.config.HpctvProps;
 import edu.ucar.cisl.controller.MachineActivityReportQuery;
 import edu.ucar.cisl.query.DefaultMachineActivityReportQuery;
 import edu.ucar.cisl.report.*;
@@ -24,10 +25,10 @@ public class MachineActivityReportConfig {
     public UriBuilder<MachineActivityReportParameters> machineActivityReportUriBuilder() {
         MachineActivityReportUriBuilder builder = new MachineActivityReportUriBuilder();
 
-        builder.setScheme(env.getProperty("sam.endpoint.scheme"));
-        builder.setHost(env.getProperty("sam.host"));
-        builder.setPort(env.getProperty("sam.port"));
-        builder.setPath(env.getProperty("sam.endpoint.machineactivity.path"));
+        builder.setScheme(env.getProperty(HpctvProps.SAM_ENDPOINT_SCHEME));
+        builder.setHost(env.getProperty(HpctvProps.SAM_HOST));
+        builder.setPort(env.getProperty(HpctvProps.SAM_PORT));
+        builder.setPath(env.getProperty(HpctvProps.SAM_ENDPOINT_MACHINEACTIVITY_PATH));
 
         return builder;
     }
