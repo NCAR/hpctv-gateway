@@ -14,28 +14,27 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MachineActivityReportControllerTest {
+public class MachineTotalReportControllerTest {
 
     @Mock
     private Environment env;
 
     @Mock
-    private MachineActivityReportQuery query;
+    private MachineTotalReportQuery query;
 
     @Mock
-    private Factory<MachineActivityReportQuery> queryFactory;
+    private Factory<MachineTotalReportQuery> queryFactory;
 
     @InjectMocks
-    private MachineActivityReportController controller;
+    private MachineTotalReportController controller;
 
     @Test
-    public void given_daysAgo__when_getMachineActivityReport__then_query_with_attributes() {
+    public void given_nothing__when_getMachineTotalReport__then_query_with_attributes() {
         when(env.getProperty(HpctvProps.SAM_MACHINE)).thenReturn("machine");
         when(queryFactory.create()).thenReturn(query);
         when(query.machine(anyString())).thenReturn(query);
-        when(query.daysAgo(60)).thenReturn(query);
 
-        controller.getMachineActivityReport(60);
+        controller.getMachineTotalReport();
 
         verify(query).query();
     }
