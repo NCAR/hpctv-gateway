@@ -3,7 +3,6 @@ package edu.ucar.cisl.report.machinelog;
 import edu.ucar.cisl.report.AbstractUriBuilder;
 import edu.ucar.cisl.report.CommonUriComponentsBuilder;
 import edu.ucar.cisl.report.UriBuilder;
-import edu.ucar.cisl.report.machineactivity.MachineActivityReportParameters;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
@@ -15,7 +14,7 @@ public class MachineLogReportUriBuilder extends AbstractUriBuilder<MachineLogRep
     }
 
     @Override
-    protected UriComponentsBuilder addRequestParams(UriComponentsBuilder builder, MachineLogReportParameters parameters) {
+    protected UriComponentsBuilder addQueryParams(UriComponentsBuilder builder, MachineLogReportParameters parameters) {
         return builder.queryParam("daysAgo", parameters.getDaysAgo());
     }
 

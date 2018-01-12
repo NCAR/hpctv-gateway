@@ -17,12 +17,12 @@ public abstract class AbstractUriBuilder<P> implements UriBuilder<P> {
     }
 
     public URI build(P parameters) {
-        return addRequestParams(buildUriComponents(), parameters)
+        return addQueryParams(buildUriComponents(), parameters)
                 .buildAndExpand(getUriParams(parameters))
                 .toUri();
     }
 
-    protected UriComponentsBuilder addRequestParams(UriComponentsBuilder builder, P parameters) {
+    protected UriComponentsBuilder addQueryParams(UriComponentsBuilder builder, P parameters) {
         return builder;
     }
 

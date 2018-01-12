@@ -67,7 +67,7 @@ public class AbstractUriBuilderTest {
         }
 
         @Override
-        protected UriComponentsBuilder addRequestParams(UriComponentsBuilder builder, TestReportParameters parameters) {
+        protected UriComponentsBuilder addQueryParams(UriComponentsBuilder builder, TestReportParameters parameters) {
             return builder.queryParam("b", parameters.getParameterB());
         }
 

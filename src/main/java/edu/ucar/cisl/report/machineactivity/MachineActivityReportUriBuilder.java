@@ -14,7 +14,7 @@ public class MachineActivityReportUriBuilder extends AbstractUriBuilder<MachineA
     }
 
     @Override
-    protected UriComponentsBuilder addRequestParams(UriComponentsBuilder builder, MachineActivityReportParameters parameters) {
+    protected UriComponentsBuilder addQueryParams(UriComponentsBuilder builder, MachineActivityReportParameters parameters) {
         return builder.queryParam("daysAgo", parameters.getDaysAgo());
     }
 
