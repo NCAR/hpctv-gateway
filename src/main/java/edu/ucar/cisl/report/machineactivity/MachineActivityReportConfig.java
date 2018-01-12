@@ -54,7 +54,7 @@ public class MachineActivityReportConfig {
         return new DefaultMachineActivityReportQuery(machineActivityReportExecutor());
     }
 
-    @Bean
+    @Bean(name = "machineActivityReportQueryFactory")
     public Factory<MachineActivityReportQuery> machineActivityReportQueryFactory() {
         return () -> machineActivityReportQuery();
     }

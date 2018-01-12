@@ -60,7 +60,7 @@ public class MachineTotalReportConfig {
         return new DefaultMachineTotalReportQuery();
     }
 
-    @Bean
+    @Bean(name = "machineTotalReportQueryFactory")
     public Factory<MachineTotalReportQuery> machineTotalReportQueryFactory() {
         return () -> machineTotalReportQuery();
     }

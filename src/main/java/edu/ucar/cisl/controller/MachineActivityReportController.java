@@ -4,6 +4,7 @@ import edu.ucar.cisl.config.Factory;
 import edu.ucar.cisl.config.HpctvProps;
 import edu.ucar.cisl.report.machineactivity.MachineActivityReport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Validated
 public class MachineActivityReportController extends BaseController {
 
-    @Autowired
+    @Autowired @Qualifier(value = "machineActivityReportQueryFactory")
     private Factory<MachineActivityReportQuery> queryFactory;
 
     @Autowired
