@@ -9,7 +9,7 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class AbstractUriBuilderTest {
+public class BaseUriBuilderTest {
 
     private CommonUriComponentsBuilder commonUriComponentsBuilder;
     private TestReportParameters parameters;
@@ -60,7 +60,7 @@ public class AbstractUriBuilderTest {
         }
     }
 
-    private class TestUriBuilder extends AbstractUriBuilder<TestReportParameters> implements UriBuilder<TestReportParameters> {
+    private class TestUriBuilder extends BaseUriBuilder<TestReportParameters> implements UriBuilder<TestReportParameters> {
 
         public TestUriBuilder(CommonUriComponentsBuilder commonUriComponentsBuilder) {
             super(commonUriComponentsBuilder);

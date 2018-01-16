@@ -6,13 +6,13 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractUriBuilder<P> implements UriBuilder<P> {
+public abstract class BaseUriBuilder<P> implements UriBuilder<P> {
 
     private final CommonUriComponentsBuilder commonUriComponentsBuilder;
 
     private String path;
 
-    public AbstractUriBuilder(CommonUriComponentsBuilder commonUriComponentsBuilder) {
+    public BaseUriBuilder(CommonUriComponentsBuilder commonUriComponentsBuilder) {
         this.commonUriComponentsBuilder = commonUriComponentsBuilder;
     }
 
