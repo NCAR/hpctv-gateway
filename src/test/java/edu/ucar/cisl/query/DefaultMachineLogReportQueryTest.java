@@ -17,8 +17,8 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultMachineLogReportQueryTest {
 
-    public static final String MACHINE = "machine";
-    public static final int DAYS_AGO = 60;
+    private static final String MACHINE = "machine";
+    private static final int DAYS_AGO = 60;
 
     @Mock
     private ReportExecutor<MachineLogReport, MachineLogReportParameters> executor;

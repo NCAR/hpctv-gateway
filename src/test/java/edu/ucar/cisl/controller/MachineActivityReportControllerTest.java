@@ -32,7 +32,7 @@ public class MachineActivityReportControllerTest {
     public void given_daysAgo__when_getMachineActivityReport__then_query_with_attributes() {
         when(env.getProperty(HpctvProps.SAM_MACHINE)).thenReturn("machine");
         when(queryFactory.create()).thenReturn(query);
-        when(query.machine(anyString())).thenReturn(query);
+        when(query.machine("machine")).thenReturn(query);
         when(query.daysAgo(60)).thenReturn(query);
 
         controller.getMachineActivityReport(60);

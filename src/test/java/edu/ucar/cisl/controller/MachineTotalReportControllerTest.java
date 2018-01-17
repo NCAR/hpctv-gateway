@@ -32,7 +32,7 @@ public class MachineTotalReportControllerTest {
     public void given_nothing__when_getMachineTotalReport__then_query_with_attributes() {
         when(env.getProperty(HpctvProps.SAM_MACHINE)).thenReturn("machine");
         when(queryFactory.create()).thenReturn(query);
-        when(query.machine(anyString())).thenReturn(query);
+        when(query.machine("machine")).thenReturn(query);
 
         controller.getMachineTotalReport();
 

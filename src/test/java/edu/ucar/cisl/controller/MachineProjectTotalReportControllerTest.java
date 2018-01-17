@@ -9,35 +9,33 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.core.env.Environment;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MachineProjectLogReportControllerTest {
+public class MachineProjectTotalReportControllerTest {
 
     @Mock
     private Environment env;
 
     @Mock
-    private MachineProjectLogReportQuery query;
+    private MachineProjectTotalReportQuery query;
 
     @Mock
-    private Factory<MachineProjectLogReportQuery> queryFactory;
+    private Factory<MachineProjectTotalReportQuery> queryFactory;
 
     @InjectMocks
-    private MachineProjectLogReportController controller;
+    MachineProjectTotalReportController controller;
 
     @Test
-    public void given_daysAgo__when_getMachineProjectLogReport__then_query_with_attributes() {
+    public void given_machine_and_projcode__when_getMachineProjectTotalReport__then_query_with_attributes() {
         when(env.getProperty(HpctvProps.SAM_MACHINE)).thenReturn("machine");
         when(queryFactory.create()).thenReturn(query);
         when(query.machine("machine")).thenReturn(query);
-        when(query.daysAgo(60)).thenReturn(query);
+        when(query.projcode("SWEG0001")).thenReturn(query);
 
-        controller.getMachineProjectLogReport(60);
+        controller.getMachineProjectTotalReport("SWEG0001");
 
         verify(query).query();
     }
-
 }

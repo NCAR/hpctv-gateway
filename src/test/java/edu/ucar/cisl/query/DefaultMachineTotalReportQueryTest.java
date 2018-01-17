@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultMachineTotalReportQueryTest {
 
-    public static final String MACHINE = "machine";
+    private static final String MACHINE = "machine";
 
     @Mock
     private ReportExecutor<MachineTotalReport, MachineTotalReportParameters> executor;
