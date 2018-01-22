@@ -46,7 +46,6 @@ public class DefaultMachineLogReportQuery implements MachineLogReportQuery, Mach
 
     @Override public String toString() {
         return "DefaultMachineLogReportQuery{" +
-                "executor=" + executor +
                 ", machine='" + machine + '\'' +
                 ", daysAgo=" + daysAgo +
                 '}';

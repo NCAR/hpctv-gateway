@@ -31,4 +31,11 @@ public class DefaultMachineTotalReportQuery implements MachineTotalReportQuery, 
         this.machine = machine;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "DefaultMachineTotalReportQuery{" +
+                "machine='" + machine + '\'' +
+                '}';
+    }
 }

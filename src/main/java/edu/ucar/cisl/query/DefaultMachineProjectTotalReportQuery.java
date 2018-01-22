@@ -43,4 +43,12 @@ public class DefaultMachineProjectTotalReportQuery implements MachineProjectTota
         this.projcode = projcode;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "DefaultMachineProjectTotalReportQuery{" +
+                "machine='" + machine + '\'' +
+                ", projcode='" + projcode + '\'' +
+                '}';
+    }
 }
