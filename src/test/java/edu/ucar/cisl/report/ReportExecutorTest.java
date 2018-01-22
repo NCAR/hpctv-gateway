@@ -44,7 +44,7 @@ public class ReportExecutorTest {
 
     @Test(expected = ReportGenerationException.class)
     public void given_generation_exception__when_execute__then_ReportGenerationException() {
-        when(generator.generate(testParameters)).thenThrow(new RuntimeException());
+        when(generator.generate(testParameters)).thenThrow(new RuntimeException("Test Failure"));
         executor.execute(testParameters);
     }
 
