@@ -41,7 +41,9 @@ public class HpctvGatewayConfig {
 
         builder.setScheme(env.getProperty(HpctvProps.SAM_ENDPOINT_SCHEME));
         builder.setHost(env.getProperty(HpctvProps.SAM_HOST));
-        builder.setPort(env.getProperty(HpctvProps.SAM_PORT));
+
+        if (env.getProperty(HpctvProps.SAM_PORT) != null)
+            builder.setPort(env.getProperty(HpctvProps.SAM_PORT));
 
         return builder;
     }
