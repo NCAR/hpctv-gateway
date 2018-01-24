@@ -12,7 +12,7 @@ WORKDIR /usr/share/hpctv-gateway
 
 RUN mvn package
 
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine AS openjdk
 
 ARG APP_PORT
 EXPOSE ${APP_PORT}

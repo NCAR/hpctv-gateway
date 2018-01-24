@@ -60,10 +60,18 @@
         <finalName>hpctv-gateway</finalName>
         <plugins>
 
-            <!-- Package as an executable jar -->
+            <!-- Package as runnable jar -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.9.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <executable>false</executable>
                 </configuration>
