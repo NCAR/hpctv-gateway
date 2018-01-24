@@ -20,4 +20,4 @@ COPY --from=maven /usr/share/hpctv-gateway/target/hpctv-gateway.jar /usr/share/h
 
 VOLUME ["/tmp", "/run/secrets"]
 
-CMD ["java","-Dhpctv-gateway.properties=/run/secrets/hpctv-gateway.properties","-jar","/usr/share/hpctv-gateway/hpctv-gateway.jar"]
+ENTRYPOINT ["java","-Dhpctv-gateway.properties=/run/secrets/hpctv-gateway.properties","-jar","/usr/share/hpctv-gateway/hpctv-gateway.jar"]
