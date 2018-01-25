@@ -17,7 +17,7 @@ FROM openjdk:8-jdk-alpine AS openjdk
 
 EXPOSE 8443
 
-COPY --from=maven /usr/share/hpctv-gateway/target/hpctv-gateway.jar /usr/share/hpctv-gateway/
+COPY --from=maven /usr/share/hpctv-gateway/target/hpctv-gateway.*.jar /usr/share/hpctv-gateway/hpctv-gateway.jar
 
 VOLUME ["/tmp", "/run/secrets"]
 
