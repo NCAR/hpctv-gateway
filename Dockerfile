@@ -5,7 +5,7 @@ LABEL repo=cisl-repo \
       name=hpctv-gateway \
       version=1.0
 
-COPY src /usr/share/hpctv-gateway/
+COPY src /usr/share/hpctv-gateway/src/
 COPY pom.xml /usr/share/hpctv-gateway/
 COPY maven-settings.xml /usr/share/hpctv-gateway/
 
