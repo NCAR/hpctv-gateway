@@ -11,6 +11,26 @@
     <name>hpctv-gateway</name>
     <description>Serves as api access to sam and cache for hpctv</description>
 
+    <scm>
+        <connection>scm:git:git@github.com:NCAR/hpctv-gateway.git</connection>
+        <url>scm:git:git@github.com:NCAR/hpctv-gateway.git</url>
+        <developerConnection>scm:git:git@github.com:NCAR/hpctv-gateway.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>repo.ucar.edu</id>
+            <name>repo.ucar.edu-releases</name>
+            <url>https://repo.ucar.edu/artifactory/apps-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>repo.ucar.edu</id>
+            <name>repo.ucar.edu-snapshots</name>
+            <url>https://repo.ucar.edu/artifactory/apps-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -21,7 +41,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <start-class>edu.ucar.cisl.HpctvGatewayApplication</start-class>
         <java.version>1.8</java.version>
     </properties>
 
@@ -74,16 +93,8 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <mainClass>edu.ucar.cisl.HpctvGatewayApplication</mainClass>
                     <executable>false</executable>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
 
