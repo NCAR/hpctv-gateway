@@ -7,10 +7,11 @@ LABEL repo=cisl-repo \
 
 COPY src /usr/share/hpctv-gateway/
 COPY pom.xml /usr/share/hpctv-gateway/
+COPY maven-settings.xml /usr/share/hpctv-gateway/
 
 WORKDIR /usr/share/hpctv-gateway
 
-RUN mvn package
+RUN mvn --settings maven-settings.xml package
 
 FROM openjdk:8-jdk-alpine AS openjdk
 
