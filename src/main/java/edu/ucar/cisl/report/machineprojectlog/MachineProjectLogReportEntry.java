@@ -67,4 +67,17 @@ public class MachineProjectLogReportEntry {
     public void setCoreHours(BigInteger coreHours) {
         this.coreHours = coreHours;
     }
+
+    @Override
+    public String toString() {
+        return "MachineProjectLogReportEntry{" +
+                "projcode='" + projcode + '\'' +
+                ", title='" + title + '\'' +
+                ", organization='" + organization + '\'' +
+                ", areaOfInterestGroup='" + areaOfInterestGroup + '\'' +
+                ", lead='" + lead + '\'' +
+                ", jobs=" + jobs +
+                ", coreHours=" + coreHours +
+                '}';
+    }
 }

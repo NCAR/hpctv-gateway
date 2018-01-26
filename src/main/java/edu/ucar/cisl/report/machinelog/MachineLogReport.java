@@ -31,4 +31,13 @@ public class MachineLogReport {
     public void setCoreHours(BigInteger coreHours) {
         this.coreHours = coreHours;
     }
+
+    @Override
+    public String toString() {
+        return "MachineLogReport{" +
+                "projects=" + projects +
+                ", jobs=" + jobs +
+                ", coreHours=" + coreHours +
+                '}';
+    }
 }
