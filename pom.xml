@@ -82,6 +82,7 @@
     </dependencies>
 
     <build>
+        <finalName>hpctv-gateway</finalName>
         <plugins>
 
             <!-- Package as runnable jar -->
