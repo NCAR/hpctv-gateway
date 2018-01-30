@@ -39,7 +39,7 @@ public class HpctvGatewayConfig {
     public CommonUriComponentsBuilder commonUriComponentsBuilder() {
         CommonUriComponentsBuilder builder = new CommonUriComponentsBuilder();
 
-        builder.setScheme(env.getProperty(HpctvProps.SAM_ENDPOINT_SCHEME));
+        builder.setScheme(env.getProperty(HpctvProps.SAM_SCHEME));
         builder.setHost(env.getProperty(HpctvProps.SAM_HOST));
 
         if (isSpecified(HpctvProps.SAM_PORT))

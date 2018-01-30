@@ -27,7 +27,7 @@ public class AreaOfInterestGroupLogReportConfig {
     @Bean
     public UriBuilder<AreaOfInterestGroupLogReportParameters> areaOfInterestGroupLogReportUriBuilder() {
         AreaOfInterestGroupLogReportUriBuilder builder = new AreaOfInterestGroupLogReportUriBuilder(commonUriComponentsBuilder);
-        builder.setPath(env.getProperty(HpctvProps.SAM_ENDPOINT_AOIGLOGLOG_PATH));
+        builder.setPath(env.getProperty(HpctvProps.SAM_ENDPOINT_AOIGLOG_PATH));
         return builder;
     }
 
