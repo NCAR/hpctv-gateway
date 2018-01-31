@@ -1,7 +1,7 @@
 # To build:
 
-docker build -t=cisl-repo/hpctv-gateway:v1.0 .
+docker build -t=cisl-repo/hpctv-gateway:1.0 .
 
 # To run:
 
-docker run -p 8443:8443 --name hpctv-gateway -d -v /data/hpctv-gateway/tmp:/tmp -v /etc/hpctv-gateway/secrets:/run/secrets cisl-repo/hpctv-gateway:v1.0
+docker run -p 8443:8443 --name hpctv-gateway -d -v /data/hpctv-gateway/tmp:/tmp -v /etc/hpctv-gateway/secrets:/run/secrets cisl-repo/hpctv-gateway:1.0
