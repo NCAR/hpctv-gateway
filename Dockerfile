@@ -1,10 +1,5 @@
 FROM maven:3.5.2-jdk-8-alpine AS maven
 
-ENV REFRESHED_AT 2018-01-22
-LABEL repo=cisl-repo \
-      name=hpctv-gateway \
-      version=1.0
-
 COPY src /usr/share/hpctv-gateway/src/
 COPY pom.xml /usr/share/hpctv-gateway/
 COPY maven-settings.xml /usr/share/hpctv-gateway/
@@ -14,6 +9,10 @@ WORKDIR /usr/share/hpctv-gateway
 RUN mvn --settings maven-settings.xml package
 
 FROM openjdk:8-jdk-alpine AS openjdk
+
+LABEL repo=cisl-repo \
+      name=hpctv-gateway \
+      version=1.0
 
 EXPOSE 8443
 
