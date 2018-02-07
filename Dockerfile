@@ -14,7 +14,7 @@ LABEL repo=cisl-repo \
       name=hpctv-gateway \
       version=1.0
 
-EXPOSE 8443
+EXPOSE 8080
 
 COPY --from=maven /usr/share/hpctv-gateway/target/hpctv-gateway.jar /usr/share/hpctv-gateway/hpctv-gateway.jar
 
