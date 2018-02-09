@@ -31,7 +31,7 @@ public class AreaOfInterestGroupLogReportController extends BaseController {
 
     @GetMapping("/v1/report/aoiglog/aoig/{aoig}")
     public ResponseEntity<AreaOfInterestGroupLogReport> getAreaOfInterestGroupLogReport(@PathVariable String aoig,
-            @Min(value = 10, message = "daysAgo must be between 10 and 100") @Max(value = 100, message = "daysAgo must be between 10 and 100") @RequestParam Integer daysAgo) {
+            @Min(value = 1, message = "daysAgo must be between 1 and 100") @Max(value = 100, message = "daysAgo must be between 1 and 100") @RequestParam Integer daysAgo) {
 
         AreaOfInterestGroupLogReport report = queryFactory.create()
                 .machine(env.getProperty(HpctvProps.SAM_MACHINE))

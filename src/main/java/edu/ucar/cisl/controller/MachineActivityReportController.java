@@ -29,7 +29,7 @@ public class MachineActivityReportController extends BaseController {
 
     @GetMapping("/v1/report/activity")
     public ResponseEntity<MachineActivityReport> getMachineActivityReport(
-            @Min(value = 10, message = "daysAgo must be between 10 and 100") @Max(value = 100, message = "daysAgo must be between 10 and 100") @RequestParam Integer daysAgo) {
+            @Min(value = 1, message = "daysAgo must be between 1 and 100") @Max(value = 100, message = "daysAgo must be between 1 and 100") @RequestParam Integer daysAgo) {
 
         MachineActivityReport report = queryFactory.create()
                 .machine(env.getProperty(HpctvProps.SAM_MACHINE))
