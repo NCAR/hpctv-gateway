@@ -93,7 +93,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>edu.ucar.cisl.HpctvGatewayApplication</mainClass>
+                    <mainClass>edu.ucar.cisl.hpctv.HpctvGatewayApplication</mainClass>
                     <executable>false</executable>
                 </configuration>
             </plugin>
