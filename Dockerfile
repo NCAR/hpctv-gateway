@@ -18,6 +18,6 @@ EXPOSE 8080
 
 COPY --from=maven /usr/share/hpctv-gateway/target/hpctv-gateway.jar /usr/share/hpctv-gateway/hpctv-gateway.jar
 
-VOLUME ["/tmp", "/run/secrets"]
+VOLUME ["/tmp", "/var/log/hpctv-gateway", "/run/secrets"]
 
-ENTRYPOINT ["java","-Dhpctv-gateway.properties=/run/secrets/hpctv-gateway.properties","-jar","/usr/share/hpctv-gateway/hpctv-gateway.jar"]
+CMD ["java","-Dhpctv-gateway.log.dir=/var/log/hpctv-gateway","-Dhpctv-gateway.properties=/run/secrets/hpctv-gateway.properties","-jar","/usr/share/hpctv-gateway/hpctv-gateway.jar"]
