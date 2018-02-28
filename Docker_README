@@ -1,9 +1,0 @@
-# To build:
-
-docker build -t=cisl-repo/hpctv-gateway:1.0 .
-docker build -f=Dockerfile_cache -t=cisl-repo/hpctv-cache:1.0 .
-
-# To run:
-
-docker run -p 8080:8080 --name hpctv-gateway -d -v /data/hpctv-gateway/tmp:/tmp -v /etc/hpctv/secrets:/run/secrets cisl-repo/hpctv-gateway:1.0
-docker run -p 443:443 --name hpctv-cache -d -v /etc/hpctv/secrets:/run/secrets cisl-repo/hpctv-cache:1.0
