@@ -7,3 +7,5 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker build -t test .
+      - run: docker tag test ncar/test:$CIRCLE_BUILD_NUM
+      - run: docker images --all
