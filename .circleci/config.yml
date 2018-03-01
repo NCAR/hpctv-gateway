@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1.14-fpm-node-browsers
+      - image: circleci/openjdk:9-jdk-node-browsers
     steps:
       - checkout
       - setup_remote_docker
