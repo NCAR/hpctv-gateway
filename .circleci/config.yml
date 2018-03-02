@@ -15,7 +15,8 @@ jobs:
       - run:
           name: "Log in to AWS ECR"
           command: eval $(aws ecr get-login)
-          
-      - run: docker build -t test .
-      - run: docker tag test ncar/test:$CIRCLE_BUILD_NUM
-      - run: docker images --all
+      - run:
+          name: "Build & Push Docker Image"
+          command: |
+            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1 .
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1
