@@ -12,6 +12,10 @@ jobs:
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: "Log in to AWS ECR"
+          command: eval $(aws ecr get-login)
+          
       - run: docker build -t test .
       - run: docker tag test ncar/test:$CIRCLE_BUILD_NUM
       - run: docker images --all
