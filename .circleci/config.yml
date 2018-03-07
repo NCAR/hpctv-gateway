@@ -80,26 +80,28 @@ jobs:
 
       - run:
           name: "Log in to AWS ECR"
-          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
+          command: eval $(aws ecr get-login --no-include-email --region $AWS_REGION)
 
       - run:
           name: "Reload and push docker image"
           command: |
             docker load < workspace/image/$CIRCLE_PROJECT_REPONAME-image.tar
-            docker tag $CIRCLE_PROJECT_REPONAME:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
-            docker tag $CIRCLE_PROJECT_REPONAME:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
+            docker tag $CIRCLE_PROJECT_REPONAME:latest $AWS_ECR_HOST/ncar-cisl-sweg-hpctv:latest
+            docker tag $CIRCLE_PROJECT_REPONAME:latest $AWS_ECR_HOST/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
+            docker push $AWS_ECR_HOST/ncar-cisl-sweg-hpctv:latest
+            docker push $AWS_ECR_HOST/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
 
 workflows:
   version: 2
   build-push:
     jobs:
       - build:
+          context: hpctv
           filters:
             tags:
               only: /.*/
       - push:
+          context: hpctv
           requires:
             - build
           filters:
