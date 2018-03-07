@@ -48,13 +48,13 @@ jobs:
       - run:
           name: "Build and store image"
           command: |
-            docker build -t hpctv-gateway:latest .
+            docker build -t $CIRCLE_PROJECT_REPONAME:latest .
 
       - run:
           name: "Create workspace"
           command: |
             mkdir -p workspace/image
-            docker save -o workspace/image/hpctv-gateway-image.tar hpctv-gateway:latest
+            docker save -o workspace/image/$CIRCLE_PROJECT_REPONAME-image.tar $CIRCLE_PROJECT_REPONAME:latest
 
       - persist_to_workspace:
           root: workspace
@@ -85,9 +85,9 @@ jobs:
       - run:
           name: "Reload and push docker image"
           command: |
-            docker load < workspace/image/hpctv-gateway-image.tar
-            docker tag hpctv-gateway:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
-            docker tag hpctv-gateway:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
+            docker load < workspace/image/$CIRCLE_PROJECT_REPONAME-image.tar
+            docker tag $CIRCLE_PROJECT_REPONAME:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
+            docker tag $CIRCLE_PROJECT_REPONAME:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
 
