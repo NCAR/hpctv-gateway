@@ -50,7 +50,7 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: "Build And store image"
+          name: "Build and store image"
           command: |
             docker build -t hpctv-gateway:$CIRCLE_BRANCH .
 
@@ -65,26 +65,42 @@ jobs:
           paths:
             - image
 
-      - run: ls workspace
+      - run: ls workspace/image
 
+  push:
+      docker:
+        # specify the version you desire here
+        - image: circleci/openjdk:8-jdk
 
-#      - setup_remote_docker
-#
-#      - run:
-#          name: "Install AWS"
-#          command: |
-#            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-#            unzip awscli-bundle.zip
-#            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-#      - run:
-#          name: "Log in to AWS ECR"
-#          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
-#      - run:
-#          name: "Build & Push Docker Image"
-#          command: |
-#            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1 .
-#            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
-#            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1
+        # Specify service dependencies here if necessary
+        # CircleCI maintains a library of pre-built images
+        # documented at https://circleci.com/docs/2.0/circleci-images/
+        # - image: circleci/postgres:9.4
+
+      steps:
+
+      - attach_workspace:
+          at: workspace
+
+      - setup_remote_docker
+
+      - run:
+          name: "Install AWS"
+          command: |
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+      - run:
+          name: "Log in to AWS ECR"
+          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
+
+      - run:
+          name: "Reload and push docker image"
+          command: |
+            docker load < workspace/image/hpctv-gateway-image.tar
+            docker tag hpctv-gateway:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
 
 workflows:
   version: 2
@@ -94,3 +110,11 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - push:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
