@@ -46,9 +46,8 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: "Build and store image"
-          command: |
-            docker build -t $CIRCLE_PROJECT_REPONAME:latest .
+          name: "Build image"
+          command: docker build -t $CIRCLE_PROJECT_REPONAME:latest .
 
       - run:
           name: "Create workspace"
