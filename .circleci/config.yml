@@ -52,20 +52,18 @@ jobs:
       - run:
           name: "Build and store image"
           command: |
-            docker build -t hpctv-gateway:$CIRCLE_BRANCH .
+            docker build -t hpctv-gateway:latest .
 
       - run:
           name: "Create workspace"
           command: |
             mkdir -p workspace/image
-            docker save -o workspace/image/hpctv-gateway-image.tar hpctv-gateway:$CIRCLE_BRANCH
+            docker save -o workspace/image/hpctv-gateway-image.tar hpctv-gateway:latest
 
       - persist_to_workspace:
           root: workspace
           paths:
             - image
-
-      - run: ls workspace/image
 
   push:
       docker:
@@ -99,7 +97,7 @@ jobs:
           name: "Reload and push docker image"
           command: |
             docker load < workspace/image/hpctv-gateway-image.tar
-            docker tag hpctv-gateway:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
+            docker tag hpctv-gateway:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
 
 workflows:
