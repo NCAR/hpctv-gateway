@@ -2,11 +2,15 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
+
+defaults: &defaults
+  docker:
+    - image: circleci/openjdk:8-jdk
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    <<: *defaults
 
     environment:
       MAVEN_OPTS: -Xmx3200m
@@ -58,10 +62,9 @@ jobs:
             - image
 
   push:
-      docker:
-        - image: circleci/openjdk:8-jdk
+    <<: *defaults
 
-      steps:
+    steps:
 
       - attach_workspace:
           at: workspace
