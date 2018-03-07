@@ -14,8 +14,6 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
 
-    working_directory: ~/repo
-
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
@@ -38,7 +36,7 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn -s .circleci/settings.xml test
+      - run: mvn -s .circleci/settings.xml package
 
       - run:
           name: Save test results
@@ -50,6 +48,13 @@ jobs:
       - store_test_results:
           path: ~/junit
 
+      - run:
+          name: Save jar
+          command: |
+            ls target
+            mkdir -p ~/jar/
+            cp target/hpctv-gateway.jar ~/jar
+            ls ~/jar
 
 
 
