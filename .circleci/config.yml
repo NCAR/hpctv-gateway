@@ -6,22 +6,14 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
     environment:
-      # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "pom.xml" }}
@@ -67,13 +59,7 @@ jobs:
 
   push:
       docker:
-        # specify the version you desire here
         - image: circleci/openjdk:8-jdk
-
-        # Specify service dependencies here if necessary
-        # CircleCI maintains a library of pre-built images
-        # documented at https://circleci.com/docs/2.0/circleci-images/
-        # - image: circleci/postgres:9.4
 
       steps:
 
@@ -97,7 +83,9 @@ jobs:
           name: "Reload and push docker image"
           command: |
             docker load < workspace/image/hpctv-gateway-image.tar
+            docker tag hpctv-gateway:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
             docker tag hpctv-gateway:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_TAG
 
 workflows:
