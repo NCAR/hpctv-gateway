@@ -38,7 +38,7 @@ jobs:
       - run: mvn -s .circleci/settings.xml package
 
       - run:
-          name: Save test results
+          name: "Save test results"
           command: |
             mkdir -p ~/test-results/junit
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit \;
@@ -48,24 +48,38 @@ jobs:
           path: ~/test-results
 
       - run:
-          name: Save jar
+          name: "Build And Store Image"
           command: |
-            mkdir -p ~/jar/
-            cp target/hpctv-gateway.jar ~/jar
+            docker build -t hpctv-gateway:$CIRCLE_BRANCH .
 
-      - setup_remote_docker
       - run:
-          name: install aws
+          name: "Create Workspace"
           command: |
-            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-            unzip awscli-bundle.zip
-            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-      - run:
-          name: "Log in to AWS ECR"
-          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
-      - run:
-          name: "Build & Push Docker Image"
-          command: |
-            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1 .
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1
+            mkdir -p workspace/image
+            docker save -o workspace/image/hpctv-gateway-image.tar hpctv-gateway:$CIRCLE_BRANCH
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - image
+
+      - run: ls workspace
+
+
+#      - setup_remote_docker
+#
+#      - run:
+#          name: "Install AWS"
+#          command: |
+#            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+#            unzip awscli-bundle.zip
+#            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+#      - run:
+#          name: "Log in to AWS ECR"
+#          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
+#      - run:
+#          name: "Build & Push Docker Image"
+#          command: |
+#            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1 .
+#            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest
+#            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1
