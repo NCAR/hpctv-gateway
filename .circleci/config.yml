@@ -47,13 +47,15 @@ jobs:
       - store_test_results:
           path: ~/test-results
 
+      - setup_remote_docker
+
       - run:
-          name: "Build And Store Image"
+          name: "Build And store image"
           command: |
             docker build -t hpctv-gateway:$CIRCLE_BRANCH .
 
       - run:
-          name: "Create Workspace"
+          name: "Create workspace"
           command: |
             mkdir -p workspace/image
             docker save -o workspace/image/hpctv-gateway-image.tar hpctv-gateway:$CIRCLE_BRANCH
