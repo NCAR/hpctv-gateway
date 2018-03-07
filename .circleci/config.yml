@@ -51,37 +51,23 @@ jobs:
       - run:
           name: Save jar
           command: |
-            ls target
             mkdir -p ~/jar/
             cp target/hpctv-gateway.jar ~/jar
-            ls ~/jar
 
-
-
-
-
-
-
-
-#version: 2
-#jobs:
-#  build:
-#    docker:
-#      - image: circleci/openjdk:8-jdk
-#    steps:
-#      - checkout
-#      - setup_remote_docker
-#      - run:
-#          name: install aws
-#          command: |
-#            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-#            unzip awscli-bundle.zip
-#            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-#      - run:
-#          name: "Log in to AWS ECR"
-#          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
-#      - run:
-#          name: "Build & Push Docker Image"
-#          command: |
+      - setup_remote_docker
+      - run:
+          name: install aws
+          command: |
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: "Log in to AWS ECR"
+          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
+      - run:
+          name: "Build & Push Docker Image"
+          command: |
+            docker build -t test .
+            docker images
 #            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:latest -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1 .
 #            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/ncar-cisl-sweg-hpctv:$CIRCLE_SHA1
