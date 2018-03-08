@@ -8,6 +8,7 @@ public class MachineProjectLogReportEntry {
     private String title;
     private String organization;
     private String areaOfInterestGroup;
+    private String facility;
     private String lead;
     private Integer jobs;
     private BigInteger coreHours;
@@ -44,6 +45,14 @@ public class MachineProjectLogReportEntry {
         this.areaOfInterestGroup = areaOfInterestGroup;
     }
 
+    public String getFacility() {
+        return facility;
+    }
+
+    public void setFacility(String facility) {
+        this.facility = facility;
+    }
+
     public String getLead() {
         return lead;
     }
@@ -75,6 +84,7 @@ public class MachineProjectLogReportEntry {
                 ", title='" + title + '\'' +
                 ", organization='" + organization + '\'' +
                 ", areaOfInterestGroup='" + areaOfInterestGroup + '\'' +
+                ", facility='" + facility + '\'' +
                 ", lead='" + lead + '\'' +
                 ", jobs=" + jobs +
                 ", coreHours=" + coreHours +
