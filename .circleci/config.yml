@@ -20,7 +20,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: mvn -s .circleci/settings.xml dependency:go-offline
+      - run: mvn -s .circleci/settings.xml dependency:resolve-plugins dependency:go-offline
 
       - save_cache:
           paths:
@@ -38,7 +38,7 @@ jobs:
 
       - store_test_results:
           path: ~/test-results
-          
+
       - store_artifacts:
           path: ~/test-results
           destination: tr1
