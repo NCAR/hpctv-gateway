@@ -1,7 +1,7 @@
 package edu.ucar.cisl.hpctv.report.machinelog;
 
 import edu.ucar.cisl.hpctv.config.Factory;
-import edu.ucar.cisl.hpctv.config.HpctvProps;
+import edu.ucar.cisl.hpctv.config.HpctvConstants;
 import edu.ucar.cisl.hpctv.controller.MachineLogReportQuery;
 import edu.ucar.cisl.hpctv.query.DefaultMachineLogReportQuery;
 import edu.ucar.cisl.hpctv.report.*;
@@ -9,14 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class MachineLogReportConfig {
-
-    @Autowired
-    private Environment env;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -27,7 +23,7 @@ public class MachineLogReportConfig {
     @Bean
     public UriBuilder<MachineLogReportParameters> machineLogReportUriBuilder() {
         MachineLogReportUriBuilder builder = new MachineLogReportUriBuilder(commonUriComponentsBuilder);
-        builder.setPath(env.getProperty(HpctvProps.SAM_ENDPOINT_MACHINELOG_PATH));
+        builder.setPath(HpctvConstants.SAM_ENDPOINT_MACHINELOG_PATH);
         return builder;
     }
 
