@@ -23,10 +23,9 @@ jobs:
       - run:
           name: "Build Docker Image"
           command: |
-            docker images --filter "label=buildstage=true" -q
-            id=$(docker images --filter "label=buildimage=true" -q)
-            echo "id" $id
-            id=$(docker create $(docker images --filter "label=buildimage=true" -q))
+            docker images
+            docker images --filter "label=buildimage" -q
+            id=$(docker create $(docker images --filter "label=buildimage" -q))
             docker cp $id:/usr/share/hpctv-gateway/target/hpctv-gateway.jar - > hpctv-gateway.jar
             docker rm -v $id
 
