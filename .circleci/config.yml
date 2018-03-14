@@ -25,7 +25,7 @@ jobs:
           command: |
             mkdir -p ~/test-results/junit
             id=$(docker create $(docker images --filter "label=buildstage" -q))
-            docker cp $id:/usr/share/hpctv-gateway/target/surefire-reports/  ~/test-results/junit
+            docker cp $id:/usr/share/hpctv-gateway/target/surefire-reports/  ~/test-results
             docker rm -v $id
 
       - store_test_results:
