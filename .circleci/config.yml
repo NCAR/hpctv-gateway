@@ -18,7 +18,7 @@ jobs:
           name: "Build Docker Image"
           command: |
             docker build -t $CIRCLE_PROJECT_REPONAME:latest .
-            id=$(docker create $(docker images --filter "label=buildimage" -q))
+            id=$(docker create $(docker images --filter "label=buildimage=true" -q))
             docker cp $id:/usr/share/hpctv-gateway/target/hpctv-gateway.jar - > hpctv-gateway.jar
             docker rm -v $id
 
