@@ -21,13 +21,19 @@ jobs:
             docker images
 
       - run:
-          name: "Build Docker Image"
+          name: "Save test results"
           command: |
-            docker images
-            docker images --filter "label=buildstage" -q
+            mkdir -p ~/test-results/junit
             id=$(docker create $(docker images --filter "label=buildstage" -q))
-            docker cp $id:/usr/share/hpctv-gateway/target/hpctv-gateway.jar - > hpctv-gateway.jar
+            docker cp $id:/usr/share/hpctv-gateway/target/surefire-reports/* - > ~/test-results/junit
             docker rm -v $id
+
+      - store_test_results:
+          path: ~/test-results
+
+      - store_artifacts:
+          path: ~/test-results
+          destination: tr1
 
       - run:
           name: "Create workspace"
