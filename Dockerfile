@@ -12,8 +12,7 @@ RUN mvn --settings maven-settings.xml --quiet package
 
 FROM openjdk:8-jdk-alpine AS openjdk
 
-LABEL buildstage=false \
-      repo=cisl-repo \
+LABEL repo=cisl-repo \
       name=hpctv-gateway \
       version=1.0
 
