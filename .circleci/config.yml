@@ -12,41 +12,15 @@ jobs:
 
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: mvn -s .circleci/settings.xml dependency:resolve-plugins dependency:go-offline
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-
-      - run: mvn -s .circleci/settings.xml package
-
-      - run:
-          name: "Save test results"
-          command: |
-            mkdir -p ~/test-results/junit
-            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit \;
-          when: always
-
-      - store_test_results:
-          path: ~/test-results
-
-      - store_artifacts:
-          path: ~/test-results
-          destination: tr1
-
       - setup_remote_docker
 
       - run:
-          name: "Build image"
-          command: docker build -t $CIRCLE_PROJECT_REPONAME:latest .
+          name: "Build Docker Image"
+          command: |
+            docker build -t $CIRCLE_PROJECT_REPONAME:latest .
+            id=$(docker create $(docker images --filter "label=buildimage" -q))
+            docker cp $id:/usr/share/hpctv-gateway/target/hpctv-gateway.jar - > hpctv-gateway.jar
+            docker rm -v $id
 
       - run:
           name: "Create workspace"
@@ -58,6 +32,21 @@ jobs:
           root: workspace
           paths:
             - image
+
+#      - run:
+#          name: "Save test results"
+#          command: |
+#            mkdir -p ~/test-results/junit
+#            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit \;
+#          when: always
+#
+#      - store_test_results:
+#          path: ~/test-results
+#
+#      - store_artifacts:
+#          path: ~/test-results
+#          destination: tr1
+
 
   push:
     <<: *defaults
