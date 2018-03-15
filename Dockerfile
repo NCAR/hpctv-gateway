@@ -12,10 +12,6 @@ RUN mvn --settings maven-settings.xml --quiet package
 
 FROM openjdk:8-jdk-alpine AS openjdk
 
-LABEL repo=cisl-repo \
-      name=hpctv-gateway \
-      version=1.0
-
 EXPOSE 8080
 
 COPY --from=buildimage /usr/share/hpctv-gateway/target/hpctv-gateway.jar /usr/share/hpctv-gateway/hpctv-gateway.jar
