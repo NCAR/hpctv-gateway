@@ -9,6 +9,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ public class MachineProjectTotalReportController extends BaseController {
     @Autowired
     private Environment env;
 
+    @CrossOrigin
     @GetMapping("/v1/report/projecttotal/project/{projcode}")
     public ResponseEntity<MachineProjectTotalReport> getMachineProjectTotalReport(@PathVariable String projcode) {
 
