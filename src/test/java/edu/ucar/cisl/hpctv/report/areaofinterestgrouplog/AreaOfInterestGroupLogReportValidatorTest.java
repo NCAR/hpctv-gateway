@@ -43,9 +43,9 @@ public class AreaOfInterestGroupLogReportValidatorTest {
     }
 
     @Test
-    public void given_report__when_validate__then_false_if_projects_count_zero() {
+    public void given_report__when_validate__then_true_if_projects_count_zero() {
         report.setProjects(0);
-        assertInvalidReport();
+        assertValidReport();
     }
 
     @Test
@@ -61,9 +61,9 @@ public class AreaOfInterestGroupLogReportValidatorTest {
     }
 
     @Test
-    public void given_report__when_validate__then_false_if_jobs_count_zero() {
+    public void given_report__when_validate__then_true_if_jobs_count_zero() {
         report.setJobs(0);
-        assertInvalidReport();
+        assertValidReport();
     }
 
     @Test
@@ -79,9 +79,9 @@ public class AreaOfInterestGroupLogReportValidatorTest {
     }
 
     @Test
-    public void given_report__when_validate__then_false_if_coreHours_count_zero() {
+    public void given_report__when_validate__then_true_if_coreHours_count_zero() {
         report.setCoreHours(new BigInteger("0"));
-        assertInvalidReport();
+        assertValidReport();
     }
 
     @Test
