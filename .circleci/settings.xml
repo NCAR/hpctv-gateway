@@ -1,10 +1,22 @@
 <settings>
     <mirrors>
         <mirror>
-            <id>repo.ucar.edu</id>
-            <name>Maven Repository Manager running on repo.ucar.edu</name>
-            <url>https://repo.ucar.edu/artifactory/public/</url>
+            <id>cisl-group</id>
+            <name>NCAR Archiva Maven Repository</name>
+            <url>https://archiva.ucar.edu/repository/cisl-group</url>
             <mirrorOf>*</mirrorOf>
         </mirror>
     </mirrors>
+    <servers>
+        <server>
+            <id>cisl-group</id>
+            <username>${env.ARCHIVA_USER}</username>
+            <password>${env.ARCHIVA_PASS}</password>
+        </server>
+        <server>
+            <id>cisl-app-release</id>
+            <username>${env.ARCHIVA_USER}</username>
+            <password>${env.ARCHIVA_PASS}</password>
+        </server>
+    </servers>
 </settings>

@@ -20,15 +20,10 @@
 
     <distributionManagement>
         <repository>
-            <id>repo.ucar.edu</id>
-            <name>repo.ucar.edu-releases</name>
-            <url>https://repo.ucar.edu/artifactory/apps-release-local</url>
+            <id>cisl-app-release</id>
+            <name>Release Repository For CISL Applications</name>
+            <url>https://archiva.ucar.edu/repository/cisl-app-release</url>
         </repository>
-        <snapshotRepository>
-            <id>repo.ucar.edu</id>
-            <name>repo.ucar.edu-snapshots</name>
-            <url>https://repo.ucar.edu/artifactory/apps-snapshot-local</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <parent>
