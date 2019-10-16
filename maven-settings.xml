@@ -7,4 +7,11 @@
             <mirrorOf>*</mirrorOf>
         </mirror>
     </mirrors>
+    <servers>
+        <server>
+            <id>cisl-group</id>
+            <username>${env.ARCHIVA_USER}</username>
+            <password>${env.ARCHIVA_PASS}</password>
+        </server>
+    </servers>
 </settings>
